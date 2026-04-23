@@ -17,38 +17,6 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-
-# ── Password gate ─────────────────────────────────────────────────────────────
-def check_password():
-    """Simple password gate. Works locally (.env) and on Streamlit Cloud (st.secrets)."""
-    correct_password = None
-    try:
-        correct_password = st.secrets["APP_PASSWORD"]
-    except Exception:
-        correct_password = os.environ.get("APP_PASSWORD", "")
-
-    if not correct_password:
-        return True  # No password configured — skip gate (local dev)
-
-    if st.session_state.get("authenticated"):
-        return True
-
-    st.title("UK Restaurant Pricing Intelligence")
-    st.markdown("---")
-    pwd = st.text_input("Enter password to access the tool", type="password")
-    if st.button("Login"):
-        if pwd == correct_password:
-            st.session_state.authenticated = True
-            st.rerun()
-        else:
-            st.error("Incorrect password — please try again.")
-    return False
-
-
-if not check_password():
-    st.stop()
-
-
 # ── Constants ─────────────────────────────────────────────────────────────────
 DB_PATH = os.path.join(os.path.dirname(__file__), "data", "pricing.db")
 MONTH_ORDER = {
@@ -299,7 +267,7 @@ Be direct, specific and commercially useful. Flag where conclusions are limited 
 Question: {question}"""
 
     message = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-4-5",
         max_tokens=1500,
         messages=[{"role": "user", "content": user}],
         system=system,
@@ -742,3 +710,4 @@ with tab4:
                         )
                     except Exception as e:
                         st.error(f"Error calling Claude API: {e}")
+
