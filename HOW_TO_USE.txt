@@ -1,0 +1,171 @@
+# How to set up your Pricing Intelligence Tool
+## Plain English — no technical knowledge needed
+
+---
+
+### PART 1 — Do this once, the very first time
+
+---
+
+**Step 1 — Install Python**
+
+Python is the free software that runs the tool.
+
+1. Open your internet browser and go to: **python.org/downloads**
+2. Click the big button that says "Download Python"
+3. Open the file that downloads
+4. On the first screen of the installer you will see a checkbox at the
+   bottom that says "Add Python to PATH" — **tick this box**
+5. Click "Install Now" and wait for it to finish
+6. Click Close when done
+
+---
+
+**Step 2 — Add your Claude API key**
+
+This is what powers the "Ask a Question" feature.
+Skip this step if you don't want that feature — everything else still works.
+
+1. Go to: **console.anthropic.com** in your browser
+2. Create a free account with your email address
+3. Once logged in, click "API Keys" in the menu on the left
+4. Click "Create Key", type any name you like (e.g. "Pricing Tool"), click Create
+5. A key appears on screen — it starts with sk-ant-
+6. Copy it
+7. Open the file called **.env** inside the pricing_app folder
+   (on a Mac you may need to press Cmd+Shift+. to see files starting with a dot)
+8. You will see a line that says: ANTHROPIC_API_KEY=paste-your-key-here
+9. Delete the words "paste-your-key-here" and paste your key in their place
+10. Save the file and close it
+
+Your key now looks something like:
+ANTHROPIC_API_KEY=sk-ant-abc123xyz...
+
+The key is never shown on screen when you use the tool.
+Nobody can see it except you, and it stays on your computer.
+
+---
+
+**Step 3 — Install the tool's software**
+
+The tool needs a few free programs to run. You only install these once.
+
+**On a Mac:**
+1. Press Cmd+Space, type "Terminal", press Enter
+2. A black or white window opens with a flashing cursor
+3. Type the following (replacing "Desktop" with wherever you saved the folder):
+   cd ~/Desktop/pricing_app
+   Press Enter
+4. Type this exactly and press Enter:
+   pip install -r requirements.txt
+5. Lots of text will scroll past — this is normal, it is downloading
+   the software it needs. Wait until it stops (1 to 3 minutes).
+6. When you see a $ symbol appear and it stops moving, it is done.
+
+**On Windows:**
+1. Click the Start menu and search for "Command Prompt", open it
+2. A black window opens
+3. Type the following (replacing YourName with your Windows username):
+   cd C:\Users\YourName\Desktop\pricing_app
+   Press Enter
+4. Type this exactly and press Enter:
+   pip install -r requirements.txt
+5. Wait 1 to 3 minutes for it to finish
+6. When it stops and shows a > symbol, it is done
+
+If you see an error saying pip is not recognised, try pip3 instead.
+
+---
+
+### PART 2 — Do this every time you want to use the tool
+
+---
+
+**Step 4 — Start the tool**
+
+**On a Mac:**
+1. Open Terminal (Cmd+Space, type Terminal, press Enter)
+2. Type: cd ~/Desktop/pricing_app  and press Enter
+3. Type: streamlit run app.py  and press Enter
+4. Your browser opens automatically showing the tool
+5. Keep the Terminal window open in the background — do not close it
+
+**On Windows:**
+1. Open Command Prompt
+2. Type: cd C:\Users\YourName\Desktop\pricing_app  and press Enter
+3. Type: streamlit run app.py  and press Enter
+4. Your browser opens automatically showing the tool
+5. Keep the Command Prompt window open — do not close it
+
+If the browser does not open automatically, go to:
+http://localhost:8501
+
+---
+
+**Step 5 — Upload your pricing file**
+
+1. Look at the left side of the tool — there is a panel with a file upload box
+2. Click "Browse files" and select your pricing Excel file
+3. Wait a few seconds — you will see a green message when it is done
+4. The tool now has your data and shows the analysis automatically
+
+---
+
+**Step 6 — Use the tool**
+
+Click the tabs at the top to explore:
+
+- **Market Overview** — the headline view of who has priced and how
+- **Brand Detail** — drill into one brand and see item-by-item changes
+- **Full Table** — every brand in one table, downloadable as a spreadsheet
+- **Ask a Question** — type any question in plain English and get an answer
+
+---
+
+**Step 7 — Stop the tool when you are done**
+
+Go back to the Terminal or Command Prompt window and press Ctrl+C.
+Your data is saved automatically — nothing is lost.
+
+---
+
+### Adding new data each month
+
+When you receive a new monthly pricing file, just repeat Steps 4 and 5.
+Upload the new file and the tool will add only the new records — it will not
+create duplicates. Your history builds up automatically over time.
+
+---
+
+### If something goes wrong
+
+**Nothing happens when I type streamlit run app.py**
+Go back to Step 3 and run the install command again.
+
+**I see "No data loaded"**
+You need to upload a file. Go to Step 5.
+
+**The Ask a Question feature says no API key found**
+Check your .env file — make sure the line looks exactly like:
+ANTHROPIC_API_KEY=sk-ant-yourkey
+With no spaces around the = sign and no quote marks.
+
+**Something else went wrong**
+Copy the exact error message you see on screen, come back to Claude,
+and paste it in. The error message will explain exactly what to do next.
+
+---
+
+### What is safe and what to be aware of
+
+- All your pricing data stays on your computer — it is never uploaded anywhere
+- Your API key is stored in the .env file and never shown on screen
+- When you use Ask a Question, a summary of the data is sent to the
+  Claude API to generate the answer — the raw Excel files are not sent
+- The tool has no password — if you put it on a shared work server
+  in future, ask for help adding one first
+
+---
+
+*If you get stuck on any step, open a conversation with Claude,
+describe what you see on screen, and it will walk you through it.*
